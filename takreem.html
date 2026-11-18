@@ -53,6 +53,7 @@ html,body{margin:0;height:100%;background:#1a0710;overflow:hidden;font-family:Ma
 #start h1{font-size:76px;margin:0}#start p{font-size:26px;color:#fbf6ee;margin:0}
 #start button{margin-top:26px;font:700 30px Marhey,sans-serif;background:#F3D891;color:#4A0D20;border:0;border-radius:999px;padding:14px 46px;cursor:pointer}
 #start .hint{font-size:17px;color:#e8d9c9;margin-top:14px}
+#start #mode{position:absolute;left:28px;bottom:22px;font-size:14px;color:rgba(243,216,145,.55)}#start #mode span{cursor:pointer;padding:2px 4px}#start #mode span.sel{color:#F3D891;border-bottom:1px solid #F3D891}
 #start .gos{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}#start button#goM{background:transparent;color:#F3D891;border:2px solid #F3D891}
 #bar button.on{background:#F3D891;color:#4A0D20}
 body.manual #prog{opacity:0}
@@ -71,7 +72,7 @@ body.idle #bar{opacity:0}body.idle{cursor:none}
   <h1>فخرُ الشيماء</h1>
   <p>تكريم أوائل منتصف الفصل الأول ◆ 2026–2027</p>
   <button id="go" type="button">▶ ابدأ العرض</button>
-  <div class="hint">مسافة: إيقاف وتشغيل · الأسهم: السابق والتالي · F: ملء الشاشة · M: الصوت</div>
+  <div id="mode"><span data-m="0" class="sel">عرض تلقائي</span> · <span data-m="1">عرض بجهاز تحكم</span></div>
 </div>
 <div id="stage"><div id="frame"><div class="b1"></div><div class="b2"></div><div id="slides"></div><canvas id="confetti" width="1600" height="900"></canvas></div></div>
 <div id="prog"></div>
@@ -148,7 +149,8 @@ document.getElementById('stage').addEventListener('click',()=>{if(!playing)go(cu
 document.getElementById('stage').addEventListener('contextmenu',e=>{if(!playing){e.preventDefault();go(cur-1)}});
 let idle;addEventListener('mousemove',()=>{document.body.classList.remove('idle');clearTimeout(idle);idle=setTimeout(()=>document.body.classList.add('idle'),2500)});
 function begin(man){A();if(ac&&ac.resume)ac.resume();document.getElementById('start').classList.add('gone');full();playing=!man;upd();go(0);idle=setTimeout(()=>document.body.classList.add('idle'),2500)}
-document.getElementById('go').onclick=()=>begin(false);
+let MAN=false;document.querySelectorAll('#mode span').forEach(x=>x.onclick=()=>{MAN=x.dataset.m==='1';document.querySelectorAll('#mode span').forEach(y=>y.classList.toggle('sel',y===x))});
+document.getElementById('go').onclick=()=>begin(MAN);
 </script>
 </body>
 </html>
