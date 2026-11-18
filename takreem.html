@@ -42,7 +42,8 @@ html,body{margin:0;height:100%;background:#1a0710;overflow:hidden;font-family:Ma
 .big{font-size:120px;font-weight:700;color:var(--bur);line-height:1.2}
 .sub{font-size:40px;color:var(--ink);margin-top:6px}
 .sub2{font-size:28px;color:var(--mu);margin-top:8px}
-.gl{font-size:84px;font-weight:700;color:var(--bur)}
+.gl{font-size:84px;font-weight:700;color:var(--bur);white-space:nowrap;text-align:center}
+.sl{text-align:center}
 .gc{font-size:46px;color:var(--gold);margin-top:6px}
 .verse{font-size:40px;color:var(--bur);margin-top:26px}
 .sig{display:flex;justify-content:space-between;width:1100px;margin-top:60px;font-size:30px}
@@ -127,6 +128,7 @@ const lenOf=s=>s.t==='stu'||s.t==='sara'?dur:s.t==='group'?5:7;
 function clearT(){tm.forEach(clearTimeout);tm.length=0;clearTimeout(timer)}
 function go(i){if(i<0)i=0;if(i>=els.length){i=els.length-1;playing=false;upd()}clearT();P=[];
   els.forEach((e,j)=>{if(j===cur&&j!==i){e.classList.remove('on')}});const e=els[i];e.classList.remove('on');void e.offsetWidth;e.classList.add('on');cur=i;
+  e.querySelectorAll('.gl,.gc,.name').forEach(x=>{x.style.fontSize='';x.style.whiteSpace='nowrap';let f=parseFloat(getComputedStyle(x).fontSize),k=0;while(x.scrollWidth>1400&&k++<40){f-=3;x.style.fontSize=f+'px'}});
   const s=S[i];document.getElementById('cnt').textContent=(i+1)+' / '+els.length;
   if(s.t==='stu'||s.t==='sara'){heartbeat();tm.push(setTimeout(()=>{chime(s.r===1);burst(s.r===1?220:s.r<=3?150:90,false)},3300));tm.push(setTimeout(()=>burst(18,true),4100))}
   if(s.t==='close'){chime(true);burst(260,false);tm.push(setTimeout(()=>burst(30,true),800))}
