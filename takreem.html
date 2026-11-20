@@ -45,7 +45,7 @@ html,body{margin:0;height:100%;background:#1a0710;overflow:hidden;font-family:Ma
 .gl{font-size:84px;font-weight:700;color:var(--bur);white-space:nowrap;text-align:center}
 .sl{text-align:center}
 .gc{font-size:46px;color:var(--gold);margin-top:6px}
-.verse{font-size:40px;color:var(--bur);margin-top:26px}
+.verse{font-size:40px;color:var(--bur);margin-top:26px}.vref{font-family:Tajawal,sans-serif;font-size:20px;opacity:.75;white-space:nowrap}
 .sig{display:flex;justify-content:space-between;width:1100px;margin-top:60px;font-size:30px}
 .sig div{display:flex;flex-direction:column;align-items:center}.sig small{font-size:20px;color:var(--mu)}
 #confetti{position:absolute;inset:0;pointer-events:none}
@@ -101,9 +101,9 @@ function medal(r,sz){return '<svg width="'+sz+'" height="'+Math.round(sz*1.2)+'"
 const PR={1:'تاجُ التميّز.. وقمّةٌ تليق بها',2:'همّةٌ عالية.. وتميّزٌ مستحق',3:'إشراقةٌ مضيئة في سماء التفوّق'};
 const PRO=['نجمةٌ ساطعة في كوكبة التميّز','عزيمةٌ صادقة.. وتفوّقٌ يُفتخر به','بالعلم ترتقي.. وبالهمّة تبلغ القمم','جهدٌ مبارك.. ونجاحٌ يليق بها'];
 function html(s,i){
-  if(s.t==='open')return '<div class="big">فخرُ الشيماء</div><div class="sub">تكريم أوائل منتصف الفصل الأول</div><div class="sub2">العام الأكاديمي 2026–2027</div><div class="verse">﴿ يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ ﴾</div><div class="school">مدرسة الشيماء الثانوية للبنات ◆ متعلّم ريادي لتنمية مستدامة</div>';
+  if(s.t==='open')return '<div class="big">فخرُ الشيماء</div><div class="sub">تكريم أوائل منتصف الفصل الأول</div><div class="sub2">العام الأكاديمي 2026–2027</div><div class="verse">﴿ يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ ﴾ <span class="vref">[المجادلة: 11]</span></div><div class="school">مدرسة الشيماء الثانوية للبنات ◆ متعلّم ريادي لتنمية مستدامة</div>';
   if(s.t==='group')return '<div>'+cup(1,170)+'</div><div class="gl">'+esc(s.lvl)+'</div><div class="gc">'+esc(s.cat)+'</div><div class="sub2">كوكبة التميّز</div><div class="school">مدرسة الشيماء الثانوية للبنات</div>';
-  if(s.t==='close')return '<div class="big">ألفُ مبارك</div><div class="sub">لكلّ نجمةٍ في كوكبة التميّز.. وإلى مزيدٍ من القمم</div><div class="verse">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</div><div class="sig"><div>آسيا الذبياني<small>النائبة الأكاديمية</small></div><div>شيخة الرميحي<small>مديرة المدرسة</small></div></div>';
+  if(s.t==='close')return '<div class="big">ألفُ مبارك</div><div class="sub">لكلّ نجمةٍ في كوكبة التميّز.. وإلى مزيدٍ من القمم</div><div class="verse">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾ <span class="vref">[طه: 114]</span></div><div class="sig"><div>آسيا الذبياني<small>النائبة الأكاديمية</small></div><div>شيخة الرميحي<small>مديرة المدرسة</small></div></div>';
   if(s.t==='sara')return '<div class="chip">'+esc(s.lvl)+' ◆ '+esc(s.cat)+'</div><div class="name">'+esc(s.n)+'</div><div class="award">'+HEART+medal(0,120)+'<div class="rk">وسام المثابرة والإصرار</div>'+medal(0,120)+HEART+'</div><div class="desc">الشعبة '+'<bdi dir="ltr">'+esc(s.s)+'</bdi></div><div class="praise">همّةٌ لا تعرف التوقف.. وإصرارٌ يصنع النجاح</div><div class="school">مدرسة الشيماء الثانوية للبنات</div>';
   const icon=s.r<=3?cup(s.r,s.r===1?150:125):medal(s.r,100);
   return '<div class="chip">'+esc(s.lvl)+' ◆ '+esc(s.cat)+'</div><div class="name">'+esc(s.n)+'</div><div class="award">'+HEART+icon+'<div class="rk">المركز '+s.ord+(s.tie?'<small>مكرر</small>':'')+'</div>'+HEART+'</div><div class="desc">الشعبة <bdi dir="ltr">'+esc(s.s)+'</bdi></div><div class="praise">'+(PR[s.r]||PRO[i%PRO.length])+'</div><div class="school">مدرسة الشيماء الثانوية للبنات</div>'}
